@@ -23,7 +23,7 @@ Using this information self driving car should be able to take action so as to m
 ## Reflection
 
 
-* ###### Step 1 : Gathering feature to classify an image as vehicle and not a vehicle.*
+* ###### Step 1 : Gathering feature to classify an image as vehicle and not a vehicle.
 
 For machine to classify an image as that of vehicle or not a vehicle, it needs to learn the features that can define a car and then should be able to distinguish these features from similar set of features of other objects like road, sky, tree, person, animal etc.
 
@@ -54,24 +54,25 @@ For HOG feature, I ended up using `YCrCb` color space as the false positive were
 
 The other features used for classification were spatial features and color histograms for the car. 
 
-* ###### Step 2 : Train classifier. *
+* ###### Step 2 : Train classifier. 
 
-To train a classifier, training image sets for vehicle and non vehicle was taken from Udacity which included training sets from ([GTI Vehicle Image Database](http://www.gti.ssr.upm.es/data/Vehicle_database.html) and [KITTI](http://www.cvlibs.net/datasets/kitti/).
+To train a classifier, training image sets for vehicle and non vehicle was taken from Udacity which included training sets from ([GTI Vehicle Image Database](http://www.gti.ssr.upm.es/data/Vehicle_database.html) and [KITTI](http://www.cvlibs.net/datasets/kitti/)).
 
-All these images were loaded as two different sets of vehicle and non-vehicle. For vehicle there were *8792* images (64, 64, 3) and for non vehicle there were *8968* images (64, 64, 3). As there wasn't a lot of difference between the sets, I continues using the same for training the classifier.
+All these images were loaded as two different sets of vehicle and non-vehicle. For vehicle there were *8792* images (64, 64, 3) and for non vehicle there were *8968* images (64, 64, 3). As there wasn't a lot of difference between the sets, I continued using the same for training the classifier.
 
 For all the images, HOG features, spatial features and color histogram were extracted and then stacked for both the sets. The stacked features of type float64 were then used for training using *sklearn.svm.LinearSVC* . Before feeding the features to the classifier, the features were normalized as the scale for the extracted features were different. The features were then split into training and test sets. The training set was used for training the classifier while the test set was used to verify the accuracy.
 
 ```python
    X_train, X_test, y_train, y_test = train_test_split(
       scaled_X, y, test_size=0.2, random_state=rand_state)
+   
    svc = LinearSVC()
    svc.fit(X_train, y_train)
 ```
 
 Post training the classifier as I was already getting 0.9958 accuracy, I used the same classifier for prediction.
 
-* ###### Step 3 : Sliding window search *
+* ###### Step 3 : Sliding window search 
 
 The next step was to use sliding window to search for vehicle within the images. For this I use windows of different size, namely
 
@@ -118,7 +119,7 @@ Large
 
 ---
 
-* ###### Step 4 : Classifying the image under the window as vehicle *
+* ###### Step 4 : Classifying the image under the window as vehicle 
 
 For each of the window slides, the image within the window box was then used the extract HOG features, spatial features and color histogram. The extracted features were then normalized and fed to the training classifier to identify the image as vehicle or not.
 
