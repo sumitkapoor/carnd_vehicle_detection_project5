@@ -159,7 +159,7 @@ The heatmap is then passed to *scipy.ndimage.measurements.label()* to identify i
 ## Video Implementation
 
 
-[![@Project Video | center | img09](http://img.youtube.com/vi/ALRddoqCahc/0.jpg)](http://www.youtube.com/watch?v=yALRddoqCahc)
+[![@Project Video | center | img09](http://img.youtube.com/vi/ALRddoqCahc/0.jpg)](http://www.youtube.com/watch?v=ALRddoqCahc)
 
 
 ---
