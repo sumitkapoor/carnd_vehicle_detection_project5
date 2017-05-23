@@ -169,7 +169,7 @@ This is then passed to *scipy.ndimage.measurements.label()* to identify individu
 ## Video Implementation
 
 
-[![@Project Video | center | img09](http://img.youtube.com/vi/ALRddoqCahc/0.jpg)](http://www.youtube.com/watch?v=ALRddoqCahc)
+[![@Project Video | center | img09](http://img.youtube.com/vi/6TvMuC83ui8/0.jpg)](http://www.youtube.com/watch?v=6TvMuC83ui8)
 
 
 ---
