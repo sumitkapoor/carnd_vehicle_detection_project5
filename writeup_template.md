@@ -150,7 +150,17 @@ This list of windows was the then used create a heatmap. To remove false positiv
     heatmap = apply_threshold(heatmap, np.max([heatmap.std(), 1]))
 ```
 
-The heatmap is then passed to *scipy.ndimage.measurements.label()* to identify individual blobs in the heatmap. The bounding boxes are then drawn to cover the area of each blob detected. 
+The heatmap is appended to heatmap history list which maintains the history of last 10 heatmaps. The integrated heatmap history is then averaged and filtered using the same threshold. 
+
+```python
+
+   hmap = sum(heatmap_history)/ len(heatmap_history)
+   hmap = apply_threshold(hmap, np.max([hmap.std(), 1]))
+           
+   labels = label(hmap)
+```
+
+This is then passed to *scipy.ndimage.measurements.label()* to identify individual blobs in the heatmap. The bounding boxes are then drawn to cover the area of each blob detected.
 
 ![@Heatmap| center | img08](./output_images/heatmap.png)
 
@@ -171,5 +181,3 @@ During the development it took me a lot of time to get the HOG parameters that w
 For sliding window I tried multiple combinations. With smaller window sizes I was getting more false positives and with larger window sizes I was not able to detect any vehicle. After some time, I used different combinations of window sizes, starting from *48 to 192* with different overlaps. This did improve the results, but I had some false positives. To reduce the false positive I ended up defining the region with *y_start_stop and x_start_stop* parameters.
 
 Cause of this region of interest the current pipeline will not work of vehicle on left lanes.
-
-In the current form, the window box around the car is frail and seems to flicker a lot. This can be improved by using the heatmap history for the past images and then using it as an input for scipy label function. This will also reduce the false positives.
